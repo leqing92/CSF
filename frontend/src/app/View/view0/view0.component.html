@@ -1,0 +1,34 @@
+<h1>Photo Storage</h1>
+<button type="button" [routerLink]="['/upload']">Upload</button>
+<table border="1" *ngIf="bundles.length > 0"> 
+    <tr> By Observable | async</tr>
+    <tr *ngFor="let b of bundles$  | async">
+        <td> 
+            <a [routerLink]="['/bundle',b.bundleId]">
+                {{b.title}}
+            </a>
+        </td>
+        <td> {{b.date | date:'MMM dd yyyy' }}</td>
+    </tr>
+    
+    <tr> By Observable | async</tr>
+    <tr *ngFor="let b of bundlesO">
+        <td> 
+            <a [routerLink]="['/bundle',b.bundleId]">
+                {{b.title}}
+            </a>
+        </td>
+        <td> {{b.date | date:'MMM dd yyyy' }}</td>
+    </tr>
+
+    <tr> By Promise </tr>
+    <tr *ngFor="let bp of bundles">        
+        <td> 
+            <a [routerLink]="['/bundle', bp.bundleId]">
+                {{bp.title}}
+            </a>
+        </td>
+        <td>{{ bp.date | date:'MMM dd yyyy' }}</td>
+    </tr>
+</table>
+<h2 *ngIf="!(bundles.length > 0)"> No bundle exist</h2>

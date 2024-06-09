@@ -1,0 +1,9 @@
+<div *ngIf="bundle">
+    <h2>{{ bundle.title}} </h2>
+    <p> by {{ bundle.name }} on {{ bundle.date | date:'MMM dd yyyy'}}</p>
+    <p>{{ bundle.comments}} </p>
+    <div *ngFor="let url of bundle.urls">
+        <img [src]="url">
+    </div>
+    <button type="button" [routerLink]="['/upload']">Back</button>
+</div>
