@@ -9,12 +9,15 @@ import { View2Component } from './View/view2/view2.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { MultifileUploadComponent } from './components/multifile-upload/multifile-upload.component';
+
 
 const appRoute : Routes = [
   
   {path: '', component : View0Component},
   {path: 'upload', component : View1Component},
   {path : 'bundle/:id', component: View2Component},
+  {path: 'upload/multiple', component: MultifileUploadComponent},
   // wildcard
   {path:'**', redirectTo: '/', pathMatch:'full'}
 ];
@@ -25,7 +28,7 @@ const appRoute : Routes = [
     View1Component,
     View2Component,
     View0Component,
-
+    MultifileUploadComponent
   ],
   imports: [
     BrowserModule,

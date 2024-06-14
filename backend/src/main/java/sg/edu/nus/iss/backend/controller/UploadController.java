@@ -2,6 +2,7 @@ package sg.edu.nus.iss.backend.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import sg.edu.nus.iss.backend.models.Archive;
+import sg.edu.nus.iss.backend.models.BundleInfo;
 import sg.edu.nus.iss.backend.service.ArchiveService;
 
 @Controller
@@ -29,7 +31,7 @@ public class UploadController {
     public ResponseEntity<Object> postMethodName(
         @RequestPart String name,
         @RequestPart String title,
-        @RequestPart String comments, 
+        @RequestPart(required = false) String comments, 
         @RequestPart MultipartFile zipFile) {
        
         Archive archive = new Archive();
@@ -37,7 +39,7 @@ public class UploadController {
         archive.setTitle(title);
         archive.setDate(new Date());
         archive.setComments(comments);
-        // System.out.println(archive.toString());
+        // System.out.pritln(archive.toString());
 
         Optional<String> bundleIdOpt = archiveSvc.recordBundle(archive, zipFile);
         if (bundleIdOpt.isPresent()) {
@@ -52,7 +54,7 @@ public class UploadController {
             error.put("error", "Failed to create bundle");
 
             return ResponseEntity.status(500).body(error);
-        }        
+        }
     }
     
     @GetMapping(path = "/bundle/{id}")
@@ -69,10 +71,17 @@ public class UploadController {
             return ResponseEntity.status(404).body(error);
         }
     }
+
+    //return List<BundleInfo> to JsonArrayString
+    // @GetMapping(path = "/bundles")
+    // public ResponseEntity<String> getBundle() {
+    //     return ResponseEntity.status(200).body(archiveSvc.getBundles());
+    // }
     
+    //return List<BundleInfo>
     @GetMapping(path = "/bundles")
-    public ResponseEntity<String> getBundle() {
-        return ResponseEntity.status(200).body(archiveSvc.getBundles());
+    public ResponseEntity<List<BundleInfo>> getBundle() {
+        return ResponseEntity.status(200).body(archiveSvc.getBundlesAsObject());
     }
     
 }

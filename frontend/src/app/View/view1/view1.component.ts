@@ -17,14 +17,15 @@ export class View1Component implements OnInit{
 
   form !: FormGroup;
   //method from slide 8 day37 ; require to put #file in html to indicate 
-  @ViewChild('zipFile') zipFile !: ElementRef; 
+  // @ViewChild('zipFile') zipFile !: ElementRef; 
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       name : this.formbuilder.control("", [Validators.required]),
       title : this.formbuilder.control("", [Validators.required]),
       comments : this.formbuilder.control(""),
-      'zipFile' : this.formbuilder.control("", [Validators.required]),
+      zipFile : this.formbuilder.control("", [Validators.required]),
+      // 'zipFile' : this.formbuilder.control("", [Validators.required])
     })
   }
 
@@ -33,7 +34,8 @@ export class View1Component implements OnInit{
     formData.set('name', this.form.get('name')?.value);
     formData.set('title', this.form.get('title')?.value);
     formData.set('comments', this.form.get('comments')?.value);
-    formData.set('zipFile',this.zipFile.nativeElement.files[0]);
+    formData.set('zipFile', this.form.get('zipFile')?.value);
+    // formData.set('zipFile',this.zipFile.nativeElement.files[0]);
 
     console.info(formData);
     firstValueFrom(this.archiveSvc.upload(formData))
@@ -48,14 +50,14 @@ export class View1Component implements OnInit{
       })
   }
 
-  // onFileChange(event: any) {
-  //   if (event.target.files && event.target.files.length) {
-  //     const file = event.target.files[0];
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
 
-  //     this.form.patchValue({
-  //       zipFile: file
-  //     });
-  //   }
-  // }
+      this.form.patchValue({
+        zipFile: file
+      });
+    }
+  }
 
 }

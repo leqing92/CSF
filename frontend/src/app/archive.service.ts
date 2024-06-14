@@ -9,7 +9,7 @@ import { Bundle, BundleInfo } from './Models/models';
 export class ArchiveService {
 
   private readonly http = inject(HttpClient);
-
+//for zip file operation in View
   upload(data : any) : Observable<any>{
     return this.http.post("/api/upload", data);
   }
@@ -20,5 +20,10 @@ export class ArchiveService {
 
   getBundles() : Observable<BundleInfo[]> {
     return this.http.get<BundleInfo[]>('/api/bundles');
+  }
+
+//for multiple file operation in components
+  uploadMultiple(data : any) : Observable<any>{
+    return this.http.post("/api/multiple/upload", data);
   }
 }

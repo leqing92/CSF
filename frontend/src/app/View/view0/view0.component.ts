@@ -13,7 +13,7 @@ export class View0Component implements OnInit {
   private readonly archiveSvc = inject(ArchiveService);
   bundles$ !: Observable<BundleInfo[]>;
   bundlesO !: BundleInfo[];
-  bundles !: BundleInfo[];
+  bundles : BundleInfo[] =[];
 
   ngOnInit(): void {
     //by Observable | async

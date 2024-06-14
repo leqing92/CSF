@@ -45,4 +45,5 @@ public class ImageRepository {
         
         return s3.getUrl(bucketName, key).toString();
     }
+
 }

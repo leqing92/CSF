@@ -19,13 +19,13 @@
             </td>
         </tr>
         <tr>
-            <th>Archive (zip file):</th>
+            <th>Multiple Images:</th>
             <td>
                 <input type="file"
-                    accept=".zip,.rar,.7zip"
-                    formControlName="zipFile" 
-                    #zipFile
+                    accept="image/*"
+                    formControlName="images"
                     (change)="onFileChange($event)"
+                    multiple
                     >
             </td>
         </tr>

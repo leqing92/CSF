@@ -1,5 +1,6 @@
 <h1>Photo Storage</h1>
-<button type="button" [routerLink]="['/upload']">Upload</button>
+<button type="button" [routerLink]="['/upload']">Upload Zip File</button>
+<button type="button" [routerLink]="['/upload/multiple']">Upload Multiple Image File</button>
 <table border="1" *ngIf="bundles.length > 0"> 
     <tr> By Observable | async</tr>
     <tr *ngFor="let b of bundles$  | async">
@@ -11,7 +12,7 @@
         <td> {{b.date | date:'MMM dd yyyy' }}</td>
     </tr>
     
-    <tr> By Observable | async</tr>
+    <tr> By Observable </tr>
     <tr *ngFor="let b of bundlesO">
         <td> 
             <a [routerLink]="['/bundle',b.bundleId]">
